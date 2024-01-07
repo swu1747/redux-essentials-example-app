@@ -9,6 +9,7 @@ import {
 import { Navbar } from './app/Navbar'
 import PostList from './app/PostList'
 import AddPost from './app/AddPost'
+import SinglePage from './app/SinglePostPage'
 
 function App() {
   return (
@@ -21,11 +22,16 @@ function App() {
             path="/"
             render={() => (
               <>
-              <PostList/>
-              <AddPost/>
+                <PostList />
+                <AddPost />
               </>
             )}
           />
+
+          <Route
+            exact
+            path='/post/:postId' 
+            component={SinglePage}/>
           <Redirect to="/" />
         </Switch>
       </div>
