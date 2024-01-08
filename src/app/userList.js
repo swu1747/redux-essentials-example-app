@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
-const UserList = ({ choseuser }) => {
+const UserList = ({ choseuserid }) => {
     const users = useSelector((state) => {
         return state.users
     })
 
-
-
-    return (<ul>{users.map((item) =>
-        <li key={item.id} value={item.id} onClick={(e) => {
-            choseuser(e.target.value)
-        }}>{item.name}</li>
-    )}</ul>)
+    return (<><label htmlFor="postAuthor">Author:</label>
+        <select onChange={(e) => {
+            choseuserid(e.target.value)
+        }}>
+            <option value=''></option>
+            {users.map((item) =>
+                <option key={item.id} value={item.id} >{item.name}</option>
+            )}
+        </select>
+    </>)
 }
 export default UserList

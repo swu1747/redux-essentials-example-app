@@ -2,6 +2,7 @@ import React from "react";
 import { postList } from "./postslice";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom/cjs/react-router-dom";
+import PostUser from "./postuser";
 
 
 const PostList = () => {
@@ -15,7 +16,7 @@ const PostList = () => {
                 <Link to={`/post/${post.id}`} className="button muted-button">
                     ViewPost
                 </Link>
-                <p>{post.user}</p>
+                <PostUser userId={post.userid.toString()}/>
             </article>)
         }
     </section>)

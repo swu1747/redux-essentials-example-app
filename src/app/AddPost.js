@@ -1,29 +1,28 @@
-import { nanoid } from "@reduxjs/toolkit";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { add } from './postslice'
 import UserList from './userList'
 const AddPost = () => {
     const [title, settitle] = useState('')
     const [content, setcontent] = useState('')
-    const [user, setuser] = useState('')
+    const [userid, setuserid] = useState('')
     const dispatch = useDispatch()
     const addPost = () => {
-        if (title && content&&user) {
-            dispatch(add(title, content, user))
+        if (title && content && userid !== undefined || '') {
+            dispatch(add(title, content, userid))
             settitle('')
             setcontent('')
-            setuser('')
+            setuserid('')
         }
 
     }
-    const choseuser = (user) => {
-        setuser(user)
+    const choseuserid = (user) => {
+        setuserid(user)
     }
 
     return (<section>
         <h2>Add a New Post</h2>
-        <UserList choseuser={ choseuser}/>
+        <UserList choseuserid={choseuserid} />
         <form>
             <label htmlFor="postTitle">Post Title:</label>
             <input type='text' name="postTitle" id="postTitle" onChange={(e) => {
