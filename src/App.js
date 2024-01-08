@@ -10,6 +10,7 @@ import { Navbar } from './app/Navbar'
 import PostList from './app/PostList'
 import AddPost from './app/AddPost'
 import SinglePage from './app/SinglePostPage'
+import ModifyPost from './app/ModifyPost'
 
 function App() {
   return (
@@ -30,9 +31,16 @@ function App() {
 
           <Route
             exact
-            path='/post/:postId' 
-            component={SinglePage}/>
+            path='/post/:postId'
+            component={SinglePage} />
+
+          <Route
+            exact
+            path='/modify/:id'
+            component={ModifyPost} />
+
           <Redirect to="/" />
+
         </Switch>
       </div>
     </Router>
