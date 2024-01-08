@@ -8,11 +8,7 @@ const AddPost = () => {
     const dispatch = useDispatch()
     const addPost = () => {
         if (title && content) {
-            dispatch(add({
-                id: nanoid(),
-                title: title,
-                content: content
-            }))
+            dispatch(add(title, content))
             settitle('')
             setcontent('')
         }
