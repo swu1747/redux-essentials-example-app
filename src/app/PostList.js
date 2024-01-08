@@ -15,6 +15,7 @@ const PostList = () => {
                 <Link to={`/post/${post.id}`} className="button muted-button">
                     ViewPost
                 </Link>
+                <p>{post.user}</p>
             </article>)
         }
     </section>)
