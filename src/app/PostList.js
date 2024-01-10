@@ -15,8 +15,9 @@ const PostList = () => {
     const postStatus = useSelector((state) => state.posts.status)
     const error = useSelector(state => state.posts.error)
 
+
     useEffect(() => {
-        dispatch(fetchUser())
+
         if (postStatus === 'idle') {
             dispatch(fetchPosts())
         }
@@ -26,7 +27,6 @@ const PostList = () => {
     if (postStatus === 'loading') {
         content = <Spinner text="Loading..." />
     } else if (postStatus === 'succeeded') {
-        console.log(unsortposts)
         const posts = unsortposts.slice().sort((a, b) => b.date.localeCompare(a.date))
         content = posts.map((post) => <article className="post-excerpt" key={post.id}>
             <h3>{post.title}</h3>
