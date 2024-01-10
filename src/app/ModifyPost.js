@@ -7,7 +7,7 @@ const ModifyPost = (props) => {
     const dispatch = useDispatch()
     const Postid = props.match.params.id
     const { title, content } = useSelector((state) => {
-        return state.posts.find((item) => item.id === Postid)
+        return state.posts.posts.find((item) => item.id === Postid)
     })
     const [newtitle, modifytitle] = useState(title)
     const [newcontent, modifycontent] = useState(content)
