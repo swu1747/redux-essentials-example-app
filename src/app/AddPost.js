@@ -12,7 +12,7 @@ const AddPost = () => {
         if ((title && content && userid !== undefined || '') && addRequestStatus === 'idle') {
             try {
                 setAddRequestStatus('pending')
-                await dispatch(addNewPost(JSON.stringify({ title, content, userId: userid }))).unwrap()
+                await dispatch(addNewPost({ title, content, userId: userid })).unwrap()
                 settitle('')
                 setcontent('')
                 setuserid('')
