@@ -2,10 +2,7 @@ import { createSlice, nanoid, createAsyncThunk } from "@reduxjs/toolkit";
 import { client } from '../api/client'
 
 const initialState = {
-    posts: [
-        // { id: '1', title: 'haha', content: 'heiheiheihei', userid: '1', date: sub(new Date(), { minutes: 10 }).toISOString(), reactions: { thumbsUp: 0, hooray: 0, heart: 0, rocket: 0, eyes: 0 } },
-        // { id: '2', title: 'hello', content: 'world', userid: '2', date: sub(new Date(), { minutes: 5 }).toISOString(), reactions: { thumbsUp: 0, hooray: 0, heart: 0, rocket: 0, eyes: 0 } }
-    ],
+    posts: [],
     status: 'idle',
     error: null
 }
@@ -14,23 +11,23 @@ const postslice = createSlice({
     name: 'post',
     initialState: initialState,
     reducers: {
-        add: {
-            reducer: (state, action) => {
-                state.push(action.payload)
-            },
-            prepare: (title, content, userid) => {
-                return {
-                    payload: {
-                        date: new Date().toISOString(),
-                        id: nanoid(),
-                        title,
-                        content,
-                        userid,
-                        reactions: { thumbsUp: 0, hooray: 0, heart: 0, rocket: 0, eyes: 0 }
-                    }
-                }
-            }
-        },
+        // add: {
+        //     reducer: (state, action) => {
+        //         state.push(action.payload)
+        //     },
+        //     prepare: (title, content, userid) => {
+        //         return {
+        //             payload: {
+        //                 date: new Date().toISOString(),
+        //                 id: nanoid(),
+        //                 title,
+        //                 content,
+        //                 userid,
+        //                 reactions: { thumbsUp: 0, hooray: 0, heart: 0, rocket: 0, eyes: 0 }
+        //             }
+        //         }
+        //     }
+        // },
         modify: (state, action) => {
             const post = state.posts.find((item) => item.id === action.payload.id)
             post.title = action.payload.title
@@ -52,8 +49,14 @@ const postslice = createSlice({
         }).addCase(fetchPosts.rejected, (state, action) => {
             state.status = 'failed'
             state.error = action.error.message
+        }).addCase(addNewPost.fulfilled, (state, action) => {
+            state.posts.push(action.payload)
         })
     }
+})
+export const addNewPost = createAsyncThunk('posts/addNewPost', async (post) => {
+    const response = await client.post('/fakeApi/posts', post)
+    return response.data
 })
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
     const response = await client.get('/fakeApi/posts')

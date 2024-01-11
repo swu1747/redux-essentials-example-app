@@ -1,18 +1,26 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { add } from './postslice'
 import UserList from './userList'
+import addNewPost from './postslice'
 const AddPost = () => {
     const [title, settitle] = useState('')
     const [content, setcontent] = useState('')
     const [userid, setuserid] = useState('')
+    const [addRequestStatus, setAddRequestStatus] = useState('idle')
     const dispatch = useDispatch()
-    const addPost = () => {
-        if (title && content && userid !== undefined || '') {
-            dispatch(add(title, content, userid))
-            settitle('')
-            setcontent('')
-            setuserid('')
+    const addPost = async () => {
+        if ((title && content && userid !== undefined || '') && addRequestStatus === 'idle') {
+            try {
+                setAddRequestStatus('pending')
+                await dispatch(addNewPost(JSON.stringify({ title, content, userId: userid }))).unwrap()
+                settitle('')
+                setcontent('')
+                setuserid('')
+            } catch (err) {
+                console.error('Failed to save the post: ', err)
+            } finally {
+                setAddRequestStatus('idle')
+            }
         }
 
     }
