@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import UserList from './userList'
-import addNewPost from './postslice'
+import {addNewPost} from './postslice'
 const AddPost = () => {
     const [title, settitle] = useState('')
     const [content, setcontent] = useState('')
     const [userid, setuserid] = useState('')
     const [addRequestStatus, setAddRequestStatus] = useState('idle')
     const dispatch = useDispatch()
+    
     const addPost = async () => {
         if ((title && content && userid !== undefined || '') && addRequestStatus === 'idle') {
             try {
                 setAddRequestStatus('pending')
+                console.log({ title, content, userId: userid })
                 await dispatch(addNewPost({ title, content, userId: userid })).unwrap()
                 settitle('')
                 setcontent('')

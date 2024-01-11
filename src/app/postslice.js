@@ -11,23 +11,6 @@ const postslice = createSlice({
     name: 'post',
     initialState: initialState,
     reducers: {
-        // add: {
-        //     reducer: (state, action) => {
-        //         state.push(action.payload)
-        //     },
-        //     prepare: (title, content, userid) => {
-        //         return {
-        //             payload: {
-        //                 date: new Date().toISOString(),
-        //                 id: nanoid(),
-        //                 title,
-        //                 content,
-        //                 userid,
-        //                 reactions: { thumbsUp: 0, hooray: 0, heart: 0, rocket: 0, eyes: 0 }
-        //             }
-        //         }
-        //     }
-        // },
         modify: (state, action) => {
             const post = state.posts.find((item) => item.id === action.payload.id)
             post.title = action.payload.title
@@ -42,6 +25,7 @@ const postslice = createSlice({
     },
     extraReducers(builder) {
         builder.addCase(fetchPosts.pending, (state, action) => {
+            console.log('??>?>?>')
             state.status = 'pending'
         }).addCase(fetchPosts.fulfilled, (state, action) => {
             state.status = 'succeeded'
@@ -54,8 +38,8 @@ const postslice = createSlice({
         })
     }
 })
-export const addNewPost = createAsyncThunk('posts/addNewPost', async (post) => {
-    const response = await client.post('/fakeApi/posts', post)
+export const addNewPost = createAsyncThunk('posts/addNewPost', async (something) => {
+    const response = await client.post('/fakeApi/posts', something)
     return response.data
 })
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {

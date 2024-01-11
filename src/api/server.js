@@ -136,7 +136,6 @@ export const handlers = [
   }),
   rest.post('/fakeApi/posts', function (req, res, ctx) {
     const data = req.body
-
     if (data.content === 'error') {
       return res(
         ctx.delay(ARTIFICIAL_DELAY_MS),
@@ -147,7 +146,7 @@ export const handlers = [
 
     data.date = new Date().toISOString()
 
-    const user = db.user.findFirst({ where: { id: { equals: data.user } } })
+    const user = db.user.findFirst({ where: { id: { equals: data.userId } } })
     data.user = user
     data.reactions = db.reaction.create()
 
