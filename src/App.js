@@ -11,6 +11,8 @@ import PostList from './app/PostList'
 import AddPost from './app/AddPost'
 import SinglePage from './app/SinglePostPage'
 import ModifyPost from './app/ModifyPost'
+import UsersPage from './app/UsersPage'
+import SingleUser from './app/UserSinglePage'
 
 function App() {
   return (
@@ -38,6 +40,16 @@ function App() {
             exact
             path='/modify/:id'
             component={ModifyPost} />
+          <Route
+            exact
+            path='/users'
+            component={UsersPage}
+          />
+          <Route
+            exact
+            path='/users/:userId'
+            component={SingleUser}
+          />
 
           <Redirect to="/" />
 

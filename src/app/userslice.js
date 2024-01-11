@@ -18,6 +18,8 @@ const userList = createSlice({
         })
     }
 })
-
+export const userselector = (state) => {
+    return state.users
+}
 export default userList.reducer
 export { fetchUser }

@@ -8,6 +8,7 @@ export const Navbar = () => {
         <h1>Redux Essentials Example</h1>
         <div className="navLinks">
           <Link to='/'>Posts</Link>
+          <Link to='/users'>users</Link>
         </div>
         <div className="navContent">
           <div className="navLinks"></div>

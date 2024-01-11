@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { userselector } from "./userslice";
 
 const UserList = ({ choseuserid }) => {
-    const users = useSelector((state) => {
-        return state.users
-    })
+    const users = useSelector(userselector)
 
     return (<><label htmlFor="postAuthor">Author:</label>
         <select onChange={(e) => {
