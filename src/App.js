@@ -13,7 +13,7 @@ import SinglePage from './app/SinglePostPage'
 import ModifyPost from './app/ModifyPost'
 import UsersPage from './app/UsersPage'
 import SingleUser from './app/UserSinglePage'
-
+import NotificationPage from './app/NotificationPage'
 function App() {
   return (
     <Router>
@@ -49,6 +49,11 @@ function App() {
             exact
             path='/users/:userId'
             component={SingleUser}
+          />
+          <Route
+            exact
+            path='/notification'
+            component={NotificationPage}
           />
 
           <Redirect to="/" />
