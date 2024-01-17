@@ -13,9 +13,9 @@ const Notification = () => {
         const date = parseISO(noti.date)
         const timeAgo = formatDistanceToNow(date)
         const user = userList.find((user) => user.id === noti.user) || {
-            name: '???'
+            name: '????'
         }
-        dispatch(readNotification())
+        dispatch(readNotification()) 
         return (<div key={noti.id} className="notification">
             <div>
                 <b>{user.name}</b>{noti.message}
